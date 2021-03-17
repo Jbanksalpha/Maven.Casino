@@ -1,4 +1,4 @@
-package io.zipcoder.casino.DiceGames.Craps;
+/*package io.zipcoder.casino.DiceGames.Craps;
 
 import io.zipcoder.casino.DiceGames.Dices.Dice;
 import io.zipcoder.casino.DiceGames.Dices.DiceGame;
@@ -14,6 +14,7 @@ public class Craps extends DiceGame implements Game {
     private ArrayList<Dice> thrownDice;
     private Integer sumOfDice;
     private Integer pointNumber;
+
 
     public void runGame() {
         int playOrDont = console.getIntegerInput("Would you like to sit at the Craps table?\nEnter 1 for yes or 2 to exit to casino floor.");
@@ -123,7 +124,5 @@ public class Craps extends DiceGame implements Game {
 
 
 }
-
-
 
 
