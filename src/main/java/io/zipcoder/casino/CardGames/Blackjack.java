@@ -1,8 +1,8 @@
 package io.zipcoder.casino.CardGames;
-
-import io.zipcoder.casino.Menus.BlackjackMenu;
-import io.zipcoder.casino.Player;
-import io.zipcoder.casino.utilities.Console;
+import java.util.Scanner;
+//import io.zipcoder.casino.Menus.BlackjackMenu;
+//import io.zipcoder.casino.Player;
+//import io.zipcoder.casino.utilities.Console;
 
 
     public class Blackjack extends CardGame {
@@ -16,7 +16,7 @@ import io.zipcoder.casino.utilities.Console;
     }
 
 
-import java.util.Scanner;
+
 
 
     public void runGame() {
@@ -94,7 +94,7 @@ import java.util.Scanner;
 
 
 
-    }
+
 
     public double getMinBet() {
         return minBet;
