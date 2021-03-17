@@ -97,6 +97,16 @@ public class Deck {
         }
         return totalValue;
     }
+    public void bringCardsBack(Deck moveCards) {
+        int thisDeckSize = this.cards.size();
+        for (int i = 0; i < thisDeckSize; i++) {
+            moveCards.addCard(this.getCard(i));
+        }
+        for (int i = 0; i < thisDeckSize; i++) {
+            this.removeCard(0);
+        }
+
+    }
 
 
 
