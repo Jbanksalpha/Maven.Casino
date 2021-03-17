@@ -5,7 +5,7 @@ import java.util.Scanner;
 //import io.zipcoder.casino.utilities.Console;
 
 
-    public class Blackjack extends CardGame {
+public class Blackjack extends CardGame {
         private double minBet;
         private double maxBet;
 
@@ -15,29 +15,9 @@ import java.util.Scanner;
 
     }
 
-
-
-
-
-    public void runGame() {
-
-
-    }
-
-    public Deck dealCards() {
-        Deck sampleDeck = new Deck();
-        sampleDeck.createFullDeck();
-        sampleDeck.shuffleDeck();
-        System.out.println(sampleDeck);
-
-
-        return sampleDeck;
-    }
-
-    public void getResults() {
-
-        while (playerMoney > 0.0) {
-            System.out.println("Enjoy playing your game.");
+    public  void runGame() {
+        while (playerMoney >= 0.0) {
+            System.out.println("Enjoy playing your game. Make your move!!!");
             double playerBet = userInput.nextDouble();
             if (playerBet > playerMoney) {
                 System.out.println("You need more money to bet.");
@@ -51,15 +31,15 @@ import java.util.Scanner;
             dealerHand.drawFrom(dealCards());
             dealerHand.drawFrom(dealCards());
 
-            while(true){
+            while (true) {
                 System.out.print(playerHand.toString());
                 System.out.println("Your hand is valued at " + playerHand.cardsValue());
                 System.out.println("The dealer's hand is valued at " + dealerHand.getCard(0).toString() + "and a hidden card.");
                 System.out.println("Would you like to (1) Hit or (2) Stand?");
                 int response = userInput.nextInt();
-                if (response == 1 ) {
+                if (response == 1) {
                     playerHand.drawFrom(dealCards());
-                    System.out.println("You got a: " + playerHand.getCard(playerHand.deckSize()-1).toString());
+                    System.out.println("You got a: " + playerHand.getCard(playerHand.deckSize() - 1).toString());
 
                     if (playerHand.cardsValue() > 21) {
                         System.out.println("BUST!!! Your cards are at " + playerHand.cardsValue());
@@ -74,9 +54,50 @@ import java.util.Scanner;
             }
             System.out.println("Dealer hand is " + dealerHand.toString());
             if ((dealerHand.cardsValue() > playerHand.cardsValue()) && endRound == false) {
-
+                System.out.println("Dealer wins");
+                playerMoney -= playerBet;
+                endRound = true;
             }
+            while ((dealerHand.cardsValue() < 17) && endRound == false) {
+                dealerHand.drawFrom(dealCards());
+                System.out.println("Dealer draws " + dealerHand.getCard(dealerHand.deckSize() - 1).toString());
+            }
+            System.out.println("Dealar's hand is valued at " + dealerHand.cardsValue());
+            if ((dealerHand.cardsValue() > 21) && endRound == false) {
+                System.out.println("Dealer busts!!! YOU WIN!!!");
+                playerMoney += playerBet * 2;
+                endRound = true;
+            }
+            if ((playerHand.cardsValue() == dealerHand.cardsValue()) && endRound == false) {
+                System.out.println("This game ends in a tie!");
+                endRound = true;
+            }
+            if ((playerHand.cardsValue() > dealerHand.cardsValue()) && endRound == false) {
+                System.out.println("Congratulations!!! You win the hand.");
+                playerMoney += playerBet * 2;
+                endRound = true;
+            }
+            playerHand.bringCardsBack(dealCards());
+            dealerHand.bringCardsBack(dealCards());
+            System.out.println("End of hand. Please play again.");
         }
+
+
+    }
+
+    public Deck dealCards() {
+        Deck sampleDeck = new Deck();
+        sampleDeck.createFullDeck();
+        sampleDeck.shuffleDeck();
+
+
+
+        return sampleDeck;
+    }
+
+    public void getResults() {
+
+
     }
 
     public void endGame() {
@@ -86,7 +107,7 @@ import java.util.Scanner;
 
     Deck playerHand = new Deck();
     Deck dealerHand = new Deck();
-    double playerMoney = 0.0;
+    double playerMoney = 300.00;
 
     Scanner userInput = new Scanner(System.in);
 
