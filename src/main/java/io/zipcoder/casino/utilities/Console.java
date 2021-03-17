@@ -83,13 +83,30 @@ import java.util.Scanner;
     }
 
     public void clearScreen() {
-        for (int i = 0; i <50; i++) {
+        for (int i = 0; i < 50; i++) {
             println(" ");
         }
     }
 
-
-
+    Boolean currencyCheck(String input) {
+        return input.matches("^[0-9]{1,3}(?:,?[0-9]{3})*(?:\\.[0-9]{2})?$");
     }
+
+    public Double getCurrency(String prompt) {
+        print(prompt);
+        String input = getInput("$");
+        while (true) {
+            if (currencyCheck(input)) break;
+            else {
+                println("Enter a valid number");
+                print(prompt);
+                input = getInput("$");
+            }
+        }
+        return Double.valueOf(input);
+    }
+}
+
+
 
 
