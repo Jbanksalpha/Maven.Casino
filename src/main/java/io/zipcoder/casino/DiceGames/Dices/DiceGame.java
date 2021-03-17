@@ -17,12 +17,5 @@ public class DiceGame implements Game {
     }
 
 
-//
-//    public void runGame() {
-//
-//    }
-//
-//    public void getResults() {
-//
-//    }
+
 }
