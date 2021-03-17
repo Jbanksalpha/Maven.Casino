@@ -10,7 +10,6 @@ public class Casino {
     private static Console console = new Console(System.in, System.out);
 
     public static void main(String[] args) {
-        playerInfo();
     }
 
     public static Player playerInfo() {
