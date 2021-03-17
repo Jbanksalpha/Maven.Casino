@@ -108,5 +108,6 @@ import java.util.Scanner;
 }
 
 
-
+    public double getcurrency(String s) {
+        return 10;
 

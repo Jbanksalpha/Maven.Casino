@@ -23,7 +23,7 @@ import io.zipcoder.casino.utilities.Console;
         }
 
         double getStakes() {
-            double minBet = console.getCurrency("Table Stakes?");
+            double minBet = console.getcurrency("Table Stakes?");
             if (minBet >= 5.00 && minBet <= 250.00) {
                 return minBet;
             } else if (minBet < 5.00) {
