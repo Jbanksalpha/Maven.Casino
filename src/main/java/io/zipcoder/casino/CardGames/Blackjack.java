@@ -17,8 +17,14 @@ public class Blackjack extends CardGame {
 
     public  void runGame() {
         while (playerMoney >= 0.0) {
-            System.out.println("Enjoy playing your game. Make your move!!!");
+            System.out.println("Enjoy playing your game. Make your wager!!!");
+
             double playerBet = userInput.nextDouble();
+            if (playerBet != userInput.nextDouble()) {
+                System.out.println("Nice try Nobles!!!");
+            }
+
+
             if (playerBet > playerMoney) {
                 System.out.println("You need more money to bet.");
                 break;
@@ -33,9 +39,9 @@ public class Blackjack extends CardGame {
 
             while (true) {
                 System.out.print(playerHand.toString());
-                System.out.println("Your hand is valued at " + playerHand.cardsValue());
-                System.out.println("The dealer's hand is valued at " + dealerHand.getCard(0).toString() + "and a hidden card.");
-                System.out.println("Would you like to (1) Hit or (2) Stand?");
+                System.out.println(" Your hand is valued at " + playerHand.cardsValue());
+                System.out.println("The dealer's hand is valued at " + dealerHand.getCard(0).toString() + " and a hidden card.");
+
                 int response = userInput.nextInt();
                 if (response == 1) {
                     playerHand.drawFrom(dealCards());
@@ -77,22 +83,22 @@ public class Blackjack extends CardGame {
                 playerMoney += playerBet * 2;
                 endRound = true;
             }
+
+
+
+
             playerHand.bringCardsBack(dealCards());
             dealerHand.bringCardsBack(dealCards());
             System.out.println("End of hand. Please play again.");
         }
-
-
     }
 
     public Deck dealCards() {
         Deck sampleDeck = new Deck();
         sampleDeck.createFullDeck();
         sampleDeck.shuffleDeck();
-
-
-
         return sampleDeck;
+
     }
 
     public void getResults() {
