@@ -60,5 +60,8 @@ public class Player {
             this.winAmt = winAmt;
         }
 
+        public static Player createMember(String firstName, String lastName, int age, double balance){
+            return new Player(firstName, lastName, age, balance);
+        }
 }
 

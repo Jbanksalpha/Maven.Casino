@@ -59,7 +59,7 @@ public class Craps extends DiceGame implements Game {
     }
 
 
-    private void playGame(int wager, boolean isPassLine) {
+    public void playGame(int wager, boolean isPassLine) {
 
         if (isPassLine == true) {
             GameState outcome = playPassBet();
@@ -175,9 +175,12 @@ public class Craps extends DiceGame implements Game {
                 System.out.println("We're waiting for you to decide.");
             }
         }
+    }
 
+    public void getResults() {
 
     }
+
 }
 
 

@@ -19,6 +19,8 @@ public class WelcomeMenu {
     }
 
 
+
+
     public void menuRun(){
         console.println("Hi! Welcome to the Casino!");
         String firstName = console.getInput("Teller: What's your first name? ");
