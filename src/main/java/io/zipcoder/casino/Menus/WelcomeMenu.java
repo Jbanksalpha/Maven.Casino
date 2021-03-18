@@ -1,27 +1,22 @@
-
-package io.zipcoder.casino;
-
 package io.zipcoder.casino.Menus;
-
-
+import io.zipcoder.casino.CardGames.Blackjack;
+import io.zipcoder.casino.Menus.BlackjackMenu;
 import io.zipcoder.casino.utilities.Console;
 
 import javax.swing.*;
 import java.util.regex.Pattern;
 
 public class WelcomeMenu {
+
     private Console console = new Console(System.in, System.out);
+    private Blackjack blackjack;
+    BlackjackMenu blackjackMenu1=new BlackjackMenu(blackjack);
 
-
-    public WelcomeMenu(Console console) {
-        this.console = console;
-    }
 
     public WelcomeMenu(Console console) {
         this.console = console;
 
     }
-
 
 
     public void menuRun(){
@@ -29,13 +24,13 @@ public class WelcomeMenu {
         String firstName = console.getInput("Teller: What's your first name? ");
         boolean test=true;
         while(test){
-        if(isWord(firstName)){
-            test=false;
-        }
-        else{
-            System.out.println("Invalid entry ");
-            firstName = console.getInput("Teller: What's your first name? ");
-        }
+            if(isWord(firstName)){
+                test=false;
+            }
+            else{
+                System.out.println("Invalid entry ");
+                firstName = console.getInput("Teller: What's your first name? ");
+            }
         }
 
         String lastName = console.getInput("Teller: What's your last name? ");
@@ -51,35 +46,26 @@ public class WelcomeMenu {
         }
 
         int age = console.getInteger("Teller: How old are you? ");
-
         if (age<18){
             System.out.println("Minimum Casino Gambling Age 18+");
             System.exit(0);
 
         }
-
         console.println("Which game would you like to play");
         console.println("1-Blackjack 2-Craps 3-Exit");
 
         Integer choice= console.getIntegerInput("Enter the number of the operation you want to perform: ");
-
-
-        switch(choice){
-            case 1:
-                System.out.println("Playing blackjack");
-                break;
-            case 2:
-                System.out.println("Playing craps");
-                break;
-            case 3:
-                System.out.println("Bye!");
-                break;
-
         boolean currentlyWorking=true;
         while(currentlyWorking){
             switch(choice){
                 case 1:
-                    System.out.println("Playing blackjack");
+
+                   blackjackMenu1.displayMenu();
+//                    blackjackMenu1.getStakes();
+//                    blackjackMenu1.setStakes(3);
+
+
+                    //System.out.println("Playing blackjack");
                     currentlyWorking=false;
                     break;
                 case 2:
@@ -92,8 +78,7 @@ public class WelcomeMenu {
                 default:
                     System.out.println("Invalid choice! Please enter a valid number.");
                     choice= console.getIntegerInput("Enter the number of the operation you want to perform: ");
-        }
-
+            }
         }
     }
     public boolean isWord (String in){
