@@ -12,7 +12,7 @@ public class Craps extends DiceGame implements Game {
     Dice dice = new Dice();
 
     private ArrayList<Dice> thrownDice;
-    private Integer sumOfDice;
+    private Integer sumOfDices;
     private Integer pointNumber;
 
 
@@ -26,6 +26,18 @@ public class Craps extends DiceGame implements Game {
         }
     }
 
+    private enum GameState{
+        Continue,
+        won,
+        lose
+    }
+
+    private static final int SnakeEyes = 2;
+    private static final int AceDuece= 3;
+    private static final int Seven = 7;
+    private static final int Yoleven = 11;
+    private static final int BoxCars = 12;
+
     public void firstWager(){
 
         double tablePot = console.getDoubleInput("Please enter your wager.");
@@ -34,30 +46,20 @@ public class Craps extends DiceGame implements Game {
         double tablePot2 = console.getDoubleInput("Please enter amount to add to pot");
     }
 
-
-//    private void readyScreen(){
-//        Integer readyToRoll = console.getInteger("Are you ready to roll the dices?\nPress 1 for yes or 2 to leave.\n");
-//        if(readyToRoll == 2){runGame();}
-//        else{crapsStart();}
-//    }
-
-
     private void crapsStart() {
         int point = 0;
         GameState state;
         Integer passOrDont = console.getIntegerInput("What would you like to bet on?\n1 for PASS LINE or 2 for DON'T PASS BAR or 3 to get up.");
         if(passOrDont == 3){runGame();}
         Double tablePot = console.getDoubleInput("Please enter your wager.");
-        // bet pass line to win on 7 or 11 roll
-        // lose at 2,3,12
-        // dont pass bar to win at 2,3, push even at 12
-        // will also win with 7 after point phase
+
         int sumOfDices = dice.roll2Dices();
-//        System.out.println(sumOfDices);
+        System.out.println("First dice roll is " + sumOfDices);
         switch (sumOfDices){
             case Seven:
             case Yoleven:
                 state = GameState.won;
+
                 break;
 
             case SnakeEyes:
@@ -86,10 +88,8 @@ public class Craps extends DiceGame implements Game {
 
                 } else {
                     Integer rollAgain2 = console.getIntegerInput("Roll again!\n1 to roll");
-
-
+                    break;
                 }
-
             }
         }
         if(state == GameState.won && passOrDont == 1){
@@ -106,7 +106,7 @@ public class Craps extends DiceGame implements Game {
         }
     }
 
-        public void countMoney(){}
+    public void countMoney(){}
 
 
     public void getResults() {
@@ -117,17 +117,7 @@ public class Craps extends DiceGame implements Game {
     }
 
 
-    private enum GameState{
-        Continue,
-        won,
-        lose
-    }
 
-    private static final int SnakeEyes = 2;
-    private static final int AceDuece= 3;
-    private static final int Seven = 7;
-    private static final int Yoleven = 11;
-    private static final int BoxCars = 12;
 
 
 }
