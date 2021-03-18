@@ -108,7 +108,7 @@ public class Craps extends DiceGame implements Game {
 
     private int playSecondRound(int roll) {
         double rollAgain = console.getDoubleInput("Press 1 to roll.");
-        int secondRoll = dice.roll2Dices();
+        int secondRoll = 0;
         System.out.println("Phase2:\nThe total of the two dice is " + secondRoll);
 
         while (secondRoll !=7 || secondRoll == roll){
@@ -119,7 +119,11 @@ public class Craps extends DiceGame implements Game {
             System.out.println("Phase2:\nThe total of the two dice is " + secondRoll);
             return secondRoll;
             }
-            else{System.out.println("What are you waiting for! Keep throwing the dices!!!");}
+            else{
+                System.out.println("What are you waiting for! Keep throwing the dices!!!");
+                break;
+            }
+
         }
 
         return secondRoll;
@@ -131,7 +135,7 @@ public class Craps extends DiceGame implements Game {
         double playersCurrentBalance = player.getBalance();
         double totalWinnings = wager * 2;
         player.setBalance(playersCurrentBalance + totalWinnings);
-        System.out.println("Congratulations! You got the winning roll. Your total winnings is " + totalWinnings + "\nYour current balance is " + player.getBalance());
+        System.out.println("Congratulations! You got the winning roll. You got the table pot for a total of $" + totalWinnings + "\nYour current balance is $" + player.getBalance());
         Integer continuePlaying = console.getInteger("\nDo you want to continue playing?\nEnter 1 for yes or 2 to walk away.\n");
         if(continuePlaying == 1){
             passOrDont();
@@ -161,7 +165,7 @@ public class Craps extends DiceGame implements Game {
         double playersCurrentBalance = player.getBalance();
         double totalWinnings = wager;
         player.setBalance(playersCurrentBalance + totalWinnings);
-        System.out.println("The roll was a 12. Your wager is pushed back to you.\nYour balance is " + player.getBalance());
+        System.out.println("The roll was a 12. Your wager is pushed back to you.\nYour balance is $" + player.getBalance());
         Integer continuePlaying = console.getInteger("\nDo you want to continue playing?\nEnter 1 for yes or 2 to walk away.\n");
             if(continuePlaying == 1){
                 passOrDont();
