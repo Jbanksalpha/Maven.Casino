@@ -18,17 +18,10 @@ public class Blackjack extends CardGame {
 
     }
 
-    Deck playerHand = new Deck();
-    Deck dealerHand = new Deck();
-    double playerMoney = 300.00;
-
-    Scanner userInput = new Scanner(System.in);
-
     public  void runGame() {
         while (playerMoney >= 0.0) {
 
             double playerBet=console.getDoubleInput("Enjoy playing your game. Make your move!!!");
-
             if (playerBet > playerMoney) {
                 System.out.println("You need more money to bet.");
                 break;
@@ -44,8 +37,8 @@ public class Blackjack extends CardGame {
             while (true) {
                 System.out.print(playerHand.toString());
 
-                System.out.println(" Your hand is valued at " + playerHand.cardsValue());
-                System.out.println(" The dealer's hand is valued at " + dealerHand.getCard(0).toString() + " and a hidden card.");
+                System.out.println("Your hand is valued at " + playerHand.cardsValue());
+                System.out.println("The dealer's hand is valued at " + dealerHand.getCard(0).toString() + "and a hidden card.");
                 int response = console.getInteger("Would you like to (1) Hit or (2) Stand?");
                 if (response == 1) {
                     playerHand.drawFrom(dealCards());
@@ -113,6 +106,20 @@ public class Blackjack extends CardGame {
     public void endGame() {
         System.out.println("The game is over.");
     }
+
+
+    Deck playerHand = new Deck();
+    Deck dealerHand = new Deck();
+    double playerMoney = 300.00;
+
+    Scanner userInput = new Scanner(System.in);
+
+
+
+
+
+
+
     public double getMinBet() {
         return minBet;
     }
