@@ -1,4 +1,6 @@
 package io.zipcoder.casino.CardGames;
+import io.zipcoder.casino.utilities.Console;
+
 import java.util.Scanner;
 //import io.zipcoder.casino.Menus.BlackjackMenu;
 //import io.zipcoder.casino.Player;
@@ -8,6 +10,7 @@ import java.util.Scanner;
 public class Blackjack extends CardGame {
         private double minBet;
         private double maxBet;
+        private Console console = new Console(System.in, System.out);
 
     public Blackjack(double minBet, double maxBet) {
         this.minBet = minBet;
@@ -17,12 +20,15 @@ public class Blackjack extends CardGame {
 
     public  void runGame() {
         while (playerMoney >= 0.0) {
-            System.out.println("Enjoy playing your game. Make your wager!!!");
+
+            double playerBet=console.getDoubleInput("Enjoy playing your game. Make your move!!!");
+
 
             double playerBet = userInput.nextDouble();
             if (playerBet != userInput.nextDouble()) {
                 System.out.println("Nice try Nobles!!!");
             }
+
 
 
             if (playerBet > playerMoney) {
@@ -39,10 +45,10 @@ public class Blackjack extends CardGame {
 
             while (true) {
                 System.out.print(playerHand.toString());
-                System.out.println(" Your hand is valued at " + playerHand.cardsValue());
-                System.out.println("The dealer's hand is valued at " + dealerHand.getCard(0).toString() + " and a hidden card.");
 
-                int response = userInput.nextInt();
+                System.out.println("Your hand is valued at " + playerHand.cardsValue());
+                System.out.println("The dealer's hand is valued at " + dealerHand.getCard(0).toString() + "and a hidden card.");
+                int response = console.getInteger("Would you like to (1) Hit or (2) Stand?");
                 if (response == 1) {
                     playerHand.drawFrom(dealCards());
                     System.out.println("You got a: " + playerHand.getCard(playerHand.deckSize() - 1).toString());
