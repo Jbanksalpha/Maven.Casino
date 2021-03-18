@@ -5,106 +5,150 @@ import io.zipcoder.casino.DiceGames.Dices.DiceGame;
 import io.zipcoder.casino.Games.Game;
 import io.zipcoder.casino.utilities.Console;
 
-import java.util.ArrayList;
-
 public class Craps extends DiceGame implements Game {
-    Console console = new Console(System.in,System.out);
+    Console console = new Console(System.in, System.out);
     Dice dice = new Dice();
+    private Boolean playOrNot;
 
-    private ArrayList<Dice> thrownDice;
-    private Integer sumOfDices;
-    private Integer pointNumber;
 
+    public Integer firstWager() {
+        Integer tablePot = console.getInteger("Please enter your wager.\n");
+        return tablePot;
+    }
+
+    public Integer continueWagers() {
+        Integer tablePot2 = console.getInteger("Please enter amount to add to pot");
+        return tablePot2;
+    }
+
+    public boolean playOrNot() {
+        return playOrNot;
+    }
 
     public void runGame() {
         int playOrDont = console.getIntegerInput("Would you like to sit at the Craps table?\nEnter 1 for yes or 2 to exit to casino floor.");
-        if(playOrDont == 1) {
-            crapsStart();
-        }else {
+        if (playOrDont == 1) {
+            playCraps(firstWager(), true);
+        } else if (playOrDont == 2) {
             System.out.println("Thank you for visiting the Craps Table.");
 
+        } else {
+            runGame();
         }
     }
 
-    private enum GameState{
-        Continue,
-        won,
-        lose
-    }
-
-    private static final int SnakeEyes = 2;
-    private static final int AceDuece= 3;
-    private static final int Seven = 7;
-    private static final int Yoleven = 11;
-    private static final int BoxCars = 12;
-
-    public void firstWager(){
-
-        double tablePot = console.getDoubleInput("Please enter your wager.");
-    }
-    public void continueWagers(){
-        double tablePot2 = console.getDoubleInput("Please enter amount to add to pot");
-    }
-
-    private void crapsStart() {
-        int point = 0;
-        GameState state;
+    public void playCraps(Integer wager, boolean isChoosingPassLane) {
         Integer passOrDont = console.getIntegerInput("What would you like to bet on?\n1 for PASS LINE or 2 for DON'T PASS BAR or 3 to get up.");
-        if(passOrDont == 3){runGame();}
-        Double tablePot = console.getDoubleInput("Please enter your wager.");
+        if (passOrDont == 1) {
+            playGame(wager, true);
+        } else if (passOrDont == 2) {
+            playGame(wager, false);
+        } else if (passOrDont == 3) {
+            runGame();
+        } else {
+            playCraps(wager, playOrNot);
+        }
+    }
 
-        int sumOfDices = dice.roll2Dices();
-        System.out.println("First dice roll is " + sumOfDices);
-        switch (sumOfDices){
-            case Seven:
-            case Yoleven:
-                state = GameState.won;
+    private void playGame(int wager, boolean isChoosingPassLane){
 
-                break;
 
-            case SnakeEyes:
-            case AceDuece:
-            case BoxCars:
-                state = GameState.lose;
-                break;
+        int roll = dice.roll2Dices();
+        System.out.println(roll);
+        if(isChoosingPassLane) {
+            if (roll == 7 || roll == 11) {
+                int winnings = playerwins(wager, roll);
+                restartGame(winnings);
+            } else if (roll == 2 || roll == 3 || roll == 12) {
+                int losings = playerloses(wager, roll);
+                restartGame(losings);
+            } else {
+                playSecondRound(wager, roll, isChoosingPassLane);
+            }
+        } else {
+            if (roll == 2 || roll == 3) {
+                int winnings = playerwins(wager, roll);
+                restartGame(winnings);
+            } else if (roll == 7 || roll == 11) {
+                int losings = playerloses(wager, roll);
+                restartGame(losings);
+            } else if (roll == 12) {
+                playerties(wager, roll);
+            }
+            playSecondRound(wager, roll, isChoosingPassLane);
+        }
 
-            default:
-                // 4,5,6,8,9,10 are point numbers
-                state = GameState.Continue;
-                point = sumOfDices;
-                System.out.println("First roll has set the PLACE NUMBER of" + " " + point);
-                // come bet to win at 7 or 11
-                // field bet to win on next roll , 3,4,9,10,11. double for 2 & 12
+    }
 
-                while(state == GameState.Continue) {
-                    Integer rollAgain = console.getIntegerInput("Roll to start the second phase!\n");
-                int sumOfDices2 = dice.roll2Dices2();
-                    System.out.println("Total of the two dices: " + sumOfDices2);
-                if (sumOfDices2 == point) {
-                    state = GameState.won;
-                } else if (sumOfDices2 == Seven) {
-                    state = GameState.lose;
-                    System.out.println("Out Seven");
 
-                } else {
-                    Integer rollAgain2 = console.getIntegerInput("Roll again!\n1 to roll");
-                    break;
-                }
+    private void playSecondRound(int wager, int roll, boolean isChoosingPassLine){
+
+        if(isChoosingPassLine){
+            int second_roll = dice.roll2Dices();
+            if(second_roll == roll){
+                int winnings = playerwins(wager, second_roll);
+                restartGame(winnings);
+            } else{
+                int losings = playerloses(wager, second_roll);
+                restartGame(losings);
+            }
+        }else{
+            int second_roll = dice.roll2Dices();
+            while(second_roll != roll || second_roll != 7){
+                second_roll = dice.roll2Dices();
+            }
+            if(second_roll == roll) {
+                int losings = playerloses(wager, roll);
+                restartGame(losings);
+            }else{
+                int winnings = playerwins(wager, roll);
+                restartGame(winnings);
+
             }
         }
-        if(state == GameState.won && passOrDont == 1){
-            Double tablePotW = tablePot + tablePot;
-            System.out.println("You won! You added " + tablePotW + " to your balance");
-            crapsStart();
-        } else if(state ==GameState.lose && passOrDont ==2){
-            Double tablePotW = tablePot + tablePot;
-            System.out.println("You won! You added " + tablePotW + " to your balance");
-            crapsStart();
-        }else{
-            System.out.println("You lose! House collected your wager.");
-            crapsStart();
+    }
+
+    private boolean winPassBetSecondRound(int roll){
+        while(true){
+            int second_roll = dice.roll2Dices();
+            if(second_roll == 7) return false;
+            if(second_roll == roll) return true;
         }
     }
+
+    private boolean losePassBetSecondRound(int roll){
+        while(true){
+            int second_roll = dice.roll2Dices();
+            if(second_roll == 7) return true;
+            if(second_roll == roll) return false;
+        }
+    }
+
+    private int playerwins(int wager, int roll){
+        System.out.println("your roll was " + roll);
+        int winnings = wager * 2;
+        return winnings;
+    }
+    private int playerloses(int wager, int roll){
+        System.out.println("your roll was " + roll);
+        return 0;
+    }
+
+    private int playerties(int wager, int roll){
+        System.out.println("your roll was " + roll);
+        int winnings = wager;
+        return winnings;
+    }
+
+    private void restartGame(Integer wager){
+        playCraps(wager,true);
+    }
+
+
+
+
+
+
 
     public void countMoney(){}
 
