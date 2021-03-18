@@ -1,6 +1,8 @@
 package io.zipcoder.casino.CardGames;
 import io.zipcoder.casino.utilities.Console;
+
 import sun.java2d.SurfaceDataProxy;
+
 
 import java.util.Scanner;
 //import io.zipcoder.casino.Menus.BlackjackMenu;
@@ -26,6 +28,11 @@ public class Blackjack extends CardGame {
             double playerBet=console.getDoubleInput("Enjoy playing your game. Make your wager!!! \n or press 0 to exit game");
             if (playerBet == 0){
                 System.exit(0);
+            }
+
+            if (playerBet<0){
+                System.out.println("Duck you!");
+                break;
             }
 
             if (playerBet > playerMoney) {
