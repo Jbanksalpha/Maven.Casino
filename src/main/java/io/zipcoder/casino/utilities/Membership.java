@@ -28,7 +28,7 @@ public class Membership {
     }
 
     public static void membersStart(){
-        Player mike = Player.createMember("Mike", "Ninh", 20,1400 );
+        Player mike = Player.createMember("Mike", "Ninh", 22,1400 );
         Player lena = Player.createMember("Lena","Litouka", 21, 500);
         Player monali = Player.createMember("Monali","Khandelwal", 22, 5000);
         Player justin = Player.createMember("Justin","Banks", 23, 10000);

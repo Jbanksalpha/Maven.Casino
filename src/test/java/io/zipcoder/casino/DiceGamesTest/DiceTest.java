@@ -38,9 +38,19 @@ public class DiceTest {
         int actual = dice.roll2Dices();
         //then
 
-        Assert.assertTrue(actual <= 48 && actual >=8);
+        Assert.assertTrue(actual <= 24 && actual >=4);
     }
 
+    @Test
+    public void roll2DicesMulti2() {
+        //given
+        Dice dice = new Dice(2);
+        //when
+        int actual = dice.roll2Dices();
+        //then
+
+        Assert.assertFalse(actual > 24 && actual <4);
+    }
 
 
 }
