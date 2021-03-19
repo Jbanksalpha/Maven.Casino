@@ -1,4 +1,5 @@
 package io.zipcoder.casino.CardGames;
+import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 
 import sun.java2d.SurfaceDataProxy;
@@ -11,16 +12,20 @@ import java.util.Scanner;
 
 
 public class Blackjack extends CardGame {
-        private double minBet;
+    private final Player player;
+    private double minBet;
         private double maxBet;
         private Console console = new Console(System.in, System.out);
 
-    public Blackjack(double minBet, double maxBet) {
+    public Blackjack(Player player, double minBet, double maxBet) {
+        this.player = player;
         this.minBet = minBet;
         this.maxBet = maxBet;
     }
 
     public  void runGame() {
+        double playerMoney = player.getBalance();
+        System.out.println("You currently have $" + player.getBalance());
         while (playerMoney >= 0.0) {
 
 
@@ -49,18 +54,18 @@ public class Blackjack extends CardGame {
             while (true) {
                 System.out.print(playerHand.toString());
 
-                System.out.println("Your hand is valued at " + playerHand.cardsValue());
-                System.out.println("The dealer's hand is valued at " + dealerHand.getCard(0).toString() + "and a hidden card.");
+                System.out.println("\nYour hand is valued at " + playerHand.cardsValue() + "\n");
+                System.out.println("The dealer's hand is valued at " + dealerHand.getCard(0).toString() + " and a hidden card.");
                 int response = console.getInteger("Would you like to (1) Hit or (2) Stand?");
                 if (response == 1) {
                     playerHand.drawFrom(dealCards());
-                    System.out.println("You got a: " + playerHand.getCard(playerHand.deckSize() - 1).toString());
+                    System.out.println("\nYou got a: " + playerHand.getCard(playerHand.deckSize() - 1).toString() + "\n");
 
                     if (playerHand.cardsValue() > 21) {
                         System.out.println("BUST!!! Your cards are at " + playerHand.cardsValue());
                         playerMoney -= playerBet;
                         endRound = true;
-                        System.out.println("You now have " + playerMoney + ".");
+                        System.out.println("You now have $" + playerMoney + ".");
                         break;
                     }
                 }
@@ -68,12 +73,12 @@ public class Blackjack extends CardGame {
                     break;
                 }
             }
-            System.out.println("Dealer hand is " + dealerHand.toString());
+            System.out.println("\nDealer hand is " + dealerHand.toString() + "\n");
             if ((dealerHand.cardsValue() > playerHand.cardsValue()) && endRound == false) {
                 System.out.println("Dealer wins");
                 playerMoney -= playerBet;
                 endRound = true;
-                System.out.println("You now have " + playerMoney + ".");
+                System.out.println("You now have $" + playerMoney + ".");
             }
             while ((dealerHand.cardsValue() < 17) && endRound == false) {
                 dealerHand.drawFrom(dealCards());
@@ -84,19 +89,19 @@ public class Blackjack extends CardGame {
                 System.out.println("Dealer busts!!! YOU WIN!!!");
                 playerMoney += playerBet * 2;
                 endRound = true;
-                System.out.println("You now have " + playerMoney + ".");
+                System.out.println("You now have $" + playerMoney + ".");
             }
             if ((playerHand.cardsValue() == dealerHand.cardsValue()) && endRound == false) {
-                System.out.println("This game ends in a tie! The dealer wins by default");
+                System.out.println("This game ends in a tie! The dealer wins by default\n");
                 playerMoney -= playerBet;
                 endRound = true;
-                System.out.println("You now have " + playerMoney);
+                System.out.println("You now have $" + playerMoney);
             }
             if ((playerHand.cardsValue() > dealerHand.cardsValue()) && endRound == false) {
-                System.out.println("Congratulations!!! You win the hand.");
+                System.out.println("Congratulations!!! You win the hand.\n");
                 playerMoney += playerBet * 2;
                 endRound = true;
-                System.out.println("You now have " + playerMoney + ".");
+                System.out.println("You now have $" + playerMoney + ".");
             }
 
 
@@ -128,7 +133,8 @@ public class Blackjack extends CardGame {
 
     Deck playerHand = new Deck();
     Deck dealerHand = new Deck();
-    double playerMoney = 300.00;
+
+
 
     Scanner userInput = new Scanner(System.in);
 

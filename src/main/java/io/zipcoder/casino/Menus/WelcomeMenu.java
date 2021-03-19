@@ -41,7 +41,9 @@ public class WelcomeMenu {
         while (currentlyWorking) {
             switch (choice) {
                 case 1:
-                    blackjackMenu1.displayMenu();
+                    Blackjack blackjack = new Blackjack(player, 25, 50);
+//                    blackjackMenu1.displayMenu(player);
+                    blackjack.runGame();
                     currentlyWorking = false;
                 case 2:
                     System.out.println("Playing craps");
