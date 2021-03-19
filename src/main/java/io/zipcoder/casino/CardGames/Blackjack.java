@@ -87,8 +87,10 @@ public class Blackjack extends CardGame {
                 System.out.println("You now have " + playerMoney + ".");
             }
             if ((playerHand.cardsValue() == dealerHand.cardsValue()) && endRound == false) {
-                System.out.println("This game ends in a tie!");
+                System.out.println("This game ends in a tie! The dealer wins by default");
+                playerMoney -= playerBet;
                 endRound = true;
+                System.out.println("You now have " + playerMoney);
             }
             if ((playerHand.cardsValue() > dealerHand.cardsValue()) && endRound == false) {
                 System.out.println("Congratulations!!! You win the hand.");
