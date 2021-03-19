@@ -46,6 +46,19 @@ public class BlackjackTest {
         //Then
         Assert.assertEquals(expected,actual,0.001);
     }
+    @Test
+    public void getNonMinBet() {
+        //Given
+        double maxBet=50.0;
+        double minBet=25.0;
+        Player mike = new Player("Mike", "Ninh", 22, 12603);
+        Blackjack blackJackT=new Blackjack(mike, minBet, maxBet);
+        //When
+        double expected =45.0;
+        double actual=blackJackT.getMinBet();
+        //Then
+        Assert.assertNotEquals(expected,actual,0.001);
+    }
 
     @Test
     public void getMaxBet() {
@@ -60,6 +73,21 @@ public class BlackjackTest {
         //Then
         Assert.assertEquals(expected,actual,0.001);
     }
+    @Test
+    public void getMaxBetAlso() {
+        //Given
+        double maxBet=50.0;
+        double minBet=25.0;
+        Player lena = new Player("Lena", "Litouka", 22, 20842);
+        Blackjack blackJackT=new Blackjack(lena, minBet, maxBet);
+        //When
+        double expected =30.0;
+        double actual=blackJackT.getMaxBet();
+        //Then
+        Assert.assertNotEquals(expected,actual,0.001);
+    }
+
+
 
     @Test
     public void setMinBet() {
@@ -74,6 +102,20 @@ public class BlackjackTest {
             double actual=blackJackT.getMinBet();
             //Then
             Assert.assertEquals(expected,actual,0.001);
+    }
+    @Test
+    public void setNonMinBet() {
+        //Given
+        double maxBet=50.0;
+        double minBet=25.0;
+        Player lena = new Player("Lena", "Litouka", 22, 20842);
+        Blackjack blackJackT=new Blackjack(lena, minBet, maxBet);
+        //When
+        double expected =75.0;
+        blackJackT.setMinBet(30.0);
+        double actual=blackJackT.getMinBet();
+        //Then
+        Assert.assertNotEquals(expected,actual,0.001);
     }
 
     @Test
@@ -90,4 +132,20 @@ public class BlackjackTest {
         //Then
         Assert.assertEquals(expected,actual,0.001);
     }
+    @Test
+    public void setNonMaxBet() {
+        //Given
+        double maxBet=50.0;
+        double minBet=25.0;
+        Player justin = new Player("Justin", "Banks", 22, 20842);
+        Blackjack blackJackT=new Blackjack(justin, minBet, maxBet);
+        //When
+        double expected =70.0;
+        blackJackT.setMinBet(60.0);
+        double actual=blackJackT.getMinBet();
+        //Then
+        Assert.assertNotEquals(expected,actual,0.001);
+    }
+
+
 }
