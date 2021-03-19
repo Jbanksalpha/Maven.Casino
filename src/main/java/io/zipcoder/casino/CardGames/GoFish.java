@@ -5,20 +5,8 @@ import io.zipcoder.casino.utilities.Console;
 import java.util.Scanner;
 
 public class GoFish extends CardGame{
-
-    private double minBet;
-    private double maxBet;
-    private Console console = new Console(System.in, System.out);
-
-    public GoFish(double minBet, double maxBet) {
-        this.minBet = minBet;
-        this.maxBet = maxBet;
-
-    }
     Deck playerHand = new Deck();
     Deck dealerHand = new Deck();
-    double playerMoney = 300.00;
-
     Scanner userInput = new Scanner(System.in);
 
 
@@ -27,25 +15,20 @@ public class GoFish extends CardGame{
     }
 
     public void runGame() {
-        while (playerMoney >= 0.0) {
+        playerHand.drawFrom(dealCards());
+        playerHand.drawFrom(dealCards());
+        playerHand.drawFrom(dealCards());
+        playerHand.drawFrom(dealCards());
+        playerHand.drawFrom(dealCards());
 
-            double playerBet = console.getDoubleInput("Enjoy playing your game. Make your wager!!! \n or press 0 to exit game");
-            if (playerBet == 0) {
-                System.exit(0);
-            }
+        dealerHand.drawFrom(dealCards());
+        dealerHand.drawFrom(dealCards());
+        dealerHand.drawFrom(dealCards());
+        dealerHand.drawFrom(dealCards());
+        dealerHand.drawFrom(dealCards());
 
-            if (playerBet > playerMoney) {
-                System.out.println("You need more money to bet.");
-                break;
-            }
-            boolean endRound = false;
-
-            playerHand.drawFrom(dealCards());
-            playerHand.drawFrom(dealCards());
-
-            dealerHand.drawFrom(dealCards());
-            dealerHand.drawFrom(dealCards());
-        }
+        System.out.println("Your hand is valued at " + playerHand.cardsValue());
+        System.out.println("The dealer's hand is valued at " + dealerHand.getCard(0).toString() + "and a hidden card.");
 
     }
 
