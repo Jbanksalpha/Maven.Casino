@@ -75,10 +75,10 @@ public class Craps extends DiceGame implements Game {
 
         if (isPassLine == true) {
             GameState outcome = playPassBet();
-            endGame(wager, outcome);
+            getResults(wager, outcome);
         }else {
             GameState outcome = playDontPassLaneBet();
-            endGame(wager, outcome);
+            getResults(wager, outcome);
         }
     }
 
@@ -136,7 +136,7 @@ public class Craps extends DiceGame implements Game {
         return secondRoll;
     }
 
-    private void endGame(int wager, GameState outcome) {
+    private void getResults(int wager, GameState outcome) {
 
         if(outcome == GameState.Win){
         double playersCurrentBalance = player.getBalance();
