@@ -110,7 +110,7 @@ public class WelcomeMenu {
         }
         Player newPlayer = Membership.createPlayer(firstName,lastName,age,0);
         Membership.addMember(newPlayer);
-        menuRun();
+        returningPlayer(newPlayer);
     }
 
     public boolean isWord (String in){

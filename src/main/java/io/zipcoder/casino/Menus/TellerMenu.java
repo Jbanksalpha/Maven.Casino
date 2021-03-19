@@ -24,19 +24,17 @@ public class TellerMenu {
                 displayTellerMenu();
             case 2:
                 withdrawFunds();
-                //console.clearScreen();
                 displayTellerMenu();
                 
             case 3:
                 System.out.println(player.getBalance());
                 displayTellerMenu();
             case 4:
-               welcome.menuRun();
+               welcome.returningPlayer(player);
                 break;
         }
     }
         public void displayTellerMenu(){
-//            console.println(String.format("\nCurrent balance: $%.2f", player.getBalance()));
             int choice = console.getInteger("How can help you?\n1. Deposit funds\n2. Cash out & Go home\n3. Check balance\n4. Back to lobby\n");
             myChoice(choice);
         }
@@ -90,7 +88,6 @@ public class TellerMenu {
 
         console.getInput("( Press Enter to continue )");
     }
-
 
     public Double withdrawFunds () {
         Double withdrawal = withdraw(this.player);
