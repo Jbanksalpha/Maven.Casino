@@ -26,7 +26,7 @@ public class TellerMenu {
                 withdrawFunds();
                 //console.clearScreen();
                 displayTellerMenu();
-                break;
+                
             case 3:
                 System.out.println(player.getBalance());
                 displayTellerMenu();

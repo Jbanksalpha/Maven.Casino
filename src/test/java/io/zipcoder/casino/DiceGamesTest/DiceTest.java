@@ -38,7 +38,7 @@ public class DiceTest {
         int actual = dice.roll2Dices();
         //then
 
-        Assert.assertTrue(actual <= 24 && actual >=8);
+        Assert.assertTrue(actual <= 48 && actual >=8);
     }
 
 

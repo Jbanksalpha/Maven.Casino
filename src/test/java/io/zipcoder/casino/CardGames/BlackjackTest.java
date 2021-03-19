@@ -1,5 +1,6 @@
 package io.zipcoder.casino.CardGames;
 
+import io.zipcoder.casino.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,7 +17,9 @@ public class BlackjackTest {
 
         //When
         Deck expected=sampleDeckT;
-        Blackjack blackjack=new Blackjack(25.0,50.0);
+        Player mike = new Player("Mike", "Ninh", 22, 12603);
+
+        Blackjack blackjack=new Blackjack(mike,25.0,50.0);
         Deck actual=blackjack.dealCards();
 
         Assert.assertTrue(sampleDeckT instanceof Deck);
@@ -35,7 +38,8 @@ public class BlackjackTest {
         //Given
         double maxBet=50.0;
         double minBet=25.0;
-        Blackjack blackJackT=new Blackjack(minBet,maxBet);
+        Player mike = new Player("Mike", "Ninh", 22, 12603);
+        Blackjack blackJackT=new Blackjack(mike, minBet, maxBet);
         //When
         double expected =25.0;
         double actual=blackJackT.getMinBet();
@@ -48,7 +52,8 @@ public class BlackjackTest {
         //Given
         double maxBet=50.0;
         double minBet=25.0;
-        Blackjack blackJackT=new Blackjack(minBet,maxBet);
+        Player lena = new Player("Lena", "Litouka", 22, 20842);
+        Blackjack blackJackT=new Blackjack(lena, minBet, maxBet);
         //When
         double expected =50.0;
         double actual=blackJackT.getMaxBet();
@@ -61,7 +66,8 @@ public class BlackjackTest {
             //Given
             double maxBet=50.0;
             double minBet=25.0;
-            Blackjack blackJackT=new Blackjack(minBet,maxBet);
+            Player lena = new Player("Lena", "Litouka", 22, 20842);
+            Blackjack blackJackT=new Blackjack(lena, minBet, maxBet);
             //When
             double expected =30.0;
             blackJackT.setMinBet(30.0);
@@ -75,7 +81,8 @@ public class BlackjackTest {
         //Given
         double maxBet=50.0;
         double minBet=25.0;
-        Blackjack blackJackT=new Blackjack(minBet,maxBet);
+        Player justin = new Player("Justin", "Banks", 22, 20842);
+        Blackjack blackJackT=new Blackjack(justin, minBet, maxBet);
         //When
         double expected =60.0;
         blackJackT.setMinBet(60.0);
