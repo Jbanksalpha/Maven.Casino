@@ -18,7 +18,6 @@ public class Blackjack extends CardGame {
     public Blackjack(double minBet, double maxBet) {
         this.minBet = minBet;
         this.maxBet = maxBet;
-
     }
 
     public  void runGame() {
