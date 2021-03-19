@@ -22,7 +22,12 @@ public class Membership {
         return null;
     }
 
-    public static void membersList(String firstName, String lastName, int age, double balance){
+
+    public static Player createPlayer(String firstName, String lastName, int age, double balance){
+        return new Player(firstName, lastName, age, balance);
+    }
+
+    public static void membersStart(){
         Player mike = Player.createMember("Mike", "Ninh", 20,1400 );
         Player lena = Player.createMember("Lena","Litouka", 21, 500);
         Player monali = Player.createMember("Monali","Khandelwal", 22, 5000);

@@ -106,8 +106,3 @@ import java.util.Scanner;
         return Double.valueOf(input);
     }
 }
-
-
-    public double getcurrency(String s) {
-        return 10;
-

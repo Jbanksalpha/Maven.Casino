@@ -1,7 +1,7 @@
 package io.zipcoder.casino;
 import io.zipcoder.casino.utilities.Console;
 
-public class Player {
+    public class Player {
 
         private String firstName;
         private String lastName;
@@ -49,6 +49,7 @@ public class Player {
         public double getInitialBalance() {
             return initialBalance;
         }
+
         public void setInitialBalance(double initialBalance) {
         this.initialBalance = initialBalance;
     }

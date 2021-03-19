@@ -8,7 +8,7 @@ public class TellerMenu {
     private Console console;
     private Player player;
     private String name = "Teller Menu";
-    private WelcomeMenu welcome;
+    WelcomeMenu welcome = new WelcomeMenu();
 
 
     public TellerMenu(Player player) {
@@ -21,24 +21,26 @@ public class TellerMenu {
         switch (choice) {
             case 1:
                 depositFunds();
-                break;
+                displayTellerMenu();
             case 2:
                 withdrawFunds();
                 //console.clearScreen();
+                displayTellerMenu();
                 break;
             case 3:
-                welcome.menuRun();
+                System.out.println(player.getBalance());
+                displayTellerMenu();
+            case 4:
+               welcome.menuRun();
                 break;
         }
-        public void displayTellerMenu() {
-            console.println("How can help you?");
-            console.println("1. Deposit funds");
-            console.println("2. Cash out / Go home");
-            console.println("3. Back to lobby");
-            console.println(String.format("\nCurrent balance: $%.2f", player.getBalance()));
-            myChoice(console.getInteger(3));
-        }
     }
+        public void displayTellerMenu(){
+//            console.println(String.format("\nCurrent balance: $%.2f", player.getBalance()));
+            int choice = console.getInteger("How can help you?\n1. Deposit funds\n2. Cash out & Go home\n3. Check balance\n4. Back to lobby\n");
+            myChoice(choice);
+        }
+
 
 
 
@@ -99,4 +101,5 @@ public class TellerMenu {
             return 0.0;
         }
 
+    }
 }
