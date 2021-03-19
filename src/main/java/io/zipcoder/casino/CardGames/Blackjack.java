@@ -1,4 +1,5 @@
 package io.zipcoder.casino.CardGames;
+import io.zipcoder.casino.Menus.WelcomeMenu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 
@@ -24,6 +25,7 @@ public class Blackjack extends CardGame {
     }
 
     public  void runGame() {
+        WelcomeMenu welcome = new WelcomeMenu();
         double playerMoney = player.getBalance();
         System.out.println("You currently have $" + player.getBalance());
         while (playerMoney >= 0.0) {
@@ -31,7 +33,7 @@ public class Blackjack extends CardGame {
 
             double playerBet=console.getDoubleInput("Enjoy playing your game. Make your wager!!! \n or press 0 to exit game");
             if (playerBet == 0){
-                System.exit(0);
+                welcome.returningPlayer(player);
             }
 
             if (playerBet<0){
@@ -103,9 +105,6 @@ public class Blackjack extends CardGame {
                 endRound = true;
                 System.out.println("You now have $" + playerMoney + ".");
             }
-
-
-
 
             playerHand.bringCardsBack(dealCards());
             dealerHand.bringCardsBack(dealCards());

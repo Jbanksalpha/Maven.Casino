@@ -80,7 +80,6 @@ public class WelcomeMenu {
     }
 
     public void createPlayer(){
-        Player newPlayer = Membership.createPlayer(null,null,0,0);
 
         String firstName = console.getInput("Teller: What's your first name? ");
         boolean test=true;
@@ -93,7 +92,6 @@ public class WelcomeMenu {
                 firstName = console.getInput("Teller: What's your first name? ");
             }
         }
-
         String lastName = console.getInput("Teller: What's your last name? ");
         boolean bool=true;
         while(bool) {
@@ -111,15 +109,12 @@ public class WelcomeMenu {
             System.out.println("Minimum Casino Gambling Age 18+");
             menuRun();
         }
-
+        Player newPlayer = Membership.createPlayer(firstName,lastName,age,0);
         Membership.addMember(newPlayer);
+        menuRun();
     }
-
-
 
     public boolean isWord (String in){
         return Pattern.matches("[a-zA-Z]+",in);
     }
-
-
 }
