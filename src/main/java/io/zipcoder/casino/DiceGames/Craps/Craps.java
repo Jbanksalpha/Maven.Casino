@@ -3,26 +3,30 @@ package io.zipcoder.casino.DiceGames.Craps;
 import io.zipcoder.casino.DiceGames.Dices.Dice;
 import io.zipcoder.casino.DiceGames.Dices.DiceGame;
 import io.zipcoder.casino.Games.Game;
+import io.zipcoder.casino.Menus.WelcomeMenu;
 import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 
 public class Craps extends DiceGame implements Game {
     Console console = new Console(System.in, System.out);
+    WelcomeMenu welcome = new WelcomeMenu();
     Dice dice = new Dice();
     Player player;
 
-    public Craps(Player player) {this.player = player;
+    public Craps(Player player){
+        this.player=player;
     }
 
-    public void runGame() {
+    public void runGame(
+
+    ) {
         int playOrDont = console.getIntegerInput("Would you like play at the Craps table?\nEnter 1 for yes or 2 to exit this part of the casino floor.");
         System.out.println("Your current balance is " + player.getBalance());
-        if (playOrDont == 1 ) {
+        if (playOrDont == 1) {
             passOrDont();
         } else if (playOrDont == 2) {
-
+            welcome.returningPlayer(player);
             System.out.println("Thank you for visiting the Craps Table.");
-
         } else {
             System.out.println("Stop wasting our time. There's others who want to play!");
             runGame();
@@ -108,8 +112,8 @@ public class Craps extends DiceGame implements Game {
 
     private int playSecondRound(int roll) {
         double rollAgain = console.getDoubleInput("Press 1 to roll.");
-        int secondRoll = 0;
-        System.out.println("Phase2:\nThe total of the two dice is " + secondRoll);
+        int secondRoll = roll;
+//        System.out.println("Phase2:\nThe total of the two dice is " + secondRoll);
 
         while (secondRoll !=7 || secondRoll == roll){
 
@@ -121,7 +125,7 @@ public class Craps extends DiceGame implements Game {
             }
             else{
                 System.out.println("What are you waiting for! Keep throwing the dices!!!");
-                break;
+
             }
 
         }

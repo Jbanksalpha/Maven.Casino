@@ -1,9 +1,10 @@
 package io.zipcoder.casino.Menus;
 import io.zipcoder.casino.CardGames.Blackjack;
-import io.zipcoder.casino.Menus.BlackjackMenu;
+import io.zipcoder.casino.DiceGames.Craps.Craps;
+import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
+import io.zipcoder.casino.utilities.Membership;
 
-import javax.swing.*;
 import java.util.regex.Pattern;
 
 public class WelcomeMenu {
@@ -13,16 +14,72 @@ public class WelcomeMenu {
     BlackjackMenu blackjackMenu1=new BlackjackMenu(blackjack);
 
 
-    public WelcomeMenu(Console console) {
+    public WelcomeMenu() {
         this.console = console;
 
     }
 
 
-
-
-    public void menuRun(){
+    public void menuRun() {
         console.println("Hi! Welcome to the Casino!");
+        int newOrReturning = console.getInteger("Enter 1 if you are a new player or 2 if you are a returning player\n");
+        if (newOrReturning == 1) {createPlayer();}
+        else if (newOrReturning == 2){
+            Player currentPlayer = checkPlayer();
+            returningPlayer(currentPlayer);
+        }
+        else{System.exit(3);}
+        }
+
+    public void returningPlayer(Player player){
+
+        console.println("Which game would you like to play");
+        console.println("1-Blackjack 2-Craps 3-Teller 4-Exit");
+
+        Integer choice = console.getIntegerInput("Enter the number of the operation you want to perform: ");
+        boolean currentlyWorking = true;
+        while (currentlyWorking) {
+            switch (choice) {
+                case 1:
+                    blackjackMenu1.displayMenu();
+                    currentlyWorking = false;
+                case 2:
+                    System.out.println("Playing craps");
+                    Craps craps = new Craps(player);
+                    craps.runGame();
+                    currentlyWorking = false;
+
+                case 3:
+                    TellerMenu teller = new TellerMenu(player);
+                    teller.displayTellerMenu();
+                    teller.myChoice(choice);
+                    currentlyWorking = false;
+                case 4:
+                    System.out.println("Bye!");
+                    menuRun();
+                    currentlyWorking = false;
+                default:
+                    System.out.println("Invalid choice! Please enter a valid number.");
+                    choice = console.getIntegerInput("Enter the number of the operation you want to perform: ");
+                    currentlyWorking = false;
+            }
+        }
+    }
+
+    public Player checkPlayer(){
+        String checkName = console.getStringInput("Please enter your first name");
+        if(Membership.getPlayerByFirstName(checkName) == null){
+            System.out.println("You dont have a membership.");
+            menuRun();
+        }
+        Player currentPlayer = Membership.getPlayerByFirstName(checkName);
+
+        return currentPlayer;
+    }
+
+    public void createPlayer(){
+        Player newPlayer = Membership.createPlayer(null,null,0,0);
+
         String firstName = console.getInput("Teller: What's your first name? ");
         boolean test=true;
         while(test){
@@ -50,39 +107,14 @@ public class WelcomeMenu {
         int age = console.getInteger("Teller: How old are you? ");
         if (age<18){
             System.out.println("Minimum Casino Gambling Age 18+");
-            System.exit(0);
-
+            menuRun();
         }
-        console.println("Which game would you like to play");
-        console.println("1-Blackjack 2-Craps 3-Exit");
 
-        Integer choice= console.getIntegerInput("Enter the number of the operation you want to perform: ");
-        boolean currentlyWorking=true;
-        while(currentlyWorking){
-            switch(choice){
-                case 1:
-
-                   blackjackMenu1.displayMenu();
-//                    blackjackMenu1.getStakes();
-//                    blackjackMenu1.setStakes(3);
-
-
-                    //System.out.println("Playing blackjack");
-                    currentlyWorking=false;
-                    break;
-                case 2:
-                    System.out.println("Playing craps");
-                    currentlyWorking=false;
-                    break;
-                case 3:
-                    System.out.println("Bye!");
-                    System.exit(3);
-                default:
-                    System.out.println("Invalid choice! Please enter a valid number.");
-                    choice= console.getIntegerInput("Enter the number of the operation you want to perform: ");
-            }
-        }
+        Membership.addMember(newPlayer);
     }
+
+
+
     public boolean isWord (String in){
         return Pattern.matches("[a-zA-Z]+",in);
     }
