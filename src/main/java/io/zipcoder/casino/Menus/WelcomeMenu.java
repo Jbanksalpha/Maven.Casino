@@ -33,7 +33,7 @@ public class WelcomeMenu {
 
     public void returningPlayer(Player player){
 
-        console.println("Which game would you like to play");
+        console.println("Where would you like to go?");
         console.println("1-Blackjack 2-Craps 3-Teller 4-Exit");
 
         Integer choice = console.getIntegerInput("Enter the number of the operation you want to perform: ");
@@ -42,24 +42,23 @@ public class WelcomeMenu {
             switch (choice) {
                 case 1:
                     Blackjack blackjack = new Blackjack(player, 25, 50);
-//                    blackjackMenu1.displayMenu(player);
                     blackjack.runGame();
-                    currentlyWorking = false;
+                    break;
                 case 2:
-                    System.out.println("Playing craps");
                     Craps craps = new Craps(player);
                     craps.runGame();
-                    currentlyWorking = false;
+                    break;
 
                 case 3:
                     TellerMenu teller = new TellerMenu(player);
                     teller.displayTellerMenu();
                     teller.myChoice(choice);
-                    currentlyWorking = false;
+                    break;
+
                 case 4:
                     System.out.println("Bye!");
                     menuRun();
-                    currentlyWorking = false;
+                    break;
                 default:
                     System.out.println("Invalid choice! Please enter a valid number.");
                     choice = console.getIntegerInput("Enter the number of the operation you want to perform: ");

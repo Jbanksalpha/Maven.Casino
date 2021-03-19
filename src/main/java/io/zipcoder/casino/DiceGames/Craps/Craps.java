@@ -8,29 +8,38 @@ import io.zipcoder.casino.Player;
 import io.zipcoder.casino.utilities.Console;
 
 public class Craps extends DiceGame implements Game {
-    Console console = new Console(System.in, System.out);
-    WelcomeMenu welcome = new WelcomeMenu();
-    Dice dice = new Dice();
-    Player player;
+        Console console = new Console(System.in, System.out);
+        WelcomeMenu welcome = new WelcomeMenu();
+        Dice dice = new Dice();
+        Player player;
 
-    public Craps(Player player){
-        this.player=player;
-    }
-
-    public void runGame(
-
-    ) {
-        int playOrDont = console.getIntegerInput("Would you like play at the Craps table?\nEnter 1 for yes or 2 to exit this part of the casino floor.");
-        System.out.println("Your current balance is " + player.getBalance());
-        if (playOrDont == 1) {
-            passOrDont();
-        } else if (playOrDont == 2) {
-            welcome.returningPlayer(player);
-            System.out.println("Thank you for visiting the Craps Table.");
-        } else {
-            System.out.println("Stop wasting our time. There's others who want to play!");
-            runGame();
+        public Craps(Player player){
+            this.player=player;
         }
+
+        public void gameRules(){
+            System.out.println("\n" +
+                    "How to play Craps-lite\n" +
+                    "You can bet on the PASS LINE where you can win with a roll total of 7 or 11 on the first roll. 2,3 or 12 loses.\n" +
+                    "If none of the above rolls out, 4, 5, 6, 8, 9, or 10 becomes the point number.\n" +
+                    "You will keep rolling until you hit the point number to win or 7 you lose.\n" +
+                    "Betting on the DON'T PASS BAR will result in the opposite of PASS LINE BAR with the exception, rolling a 12 nets a push.");
+        }
+
+        public void runGame() {
+            int playOrDont = console.getIntegerInput("\nWould you like play at the Craps table?\nEnter 1 for yes, 2 for game rules, or 3 to exit this part of the casino floor.");
+            System.out.println("Your current balance is " + player.getBalance());
+            if (playOrDont == 1) {
+                passOrDont();
+            }else if(playOrDont == 2){
+                gameRules();
+            }else if (playOrDont == 3) {
+                welcome.returningPlayer(player);
+                System.out.println("Thank you for visiting the Craps Table.");
+            } else {
+                System.out.println("Stop wasting our time. There are others who want to play!");
+                runGame();
+         }
     }
 
     public double getWager(){
@@ -61,7 +70,6 @@ public class Craps extends DiceGame implements Game {
         }
         else {passOrDont();}
     }
-
 
     public void playGame(int wager, boolean isPassLine) {
 
@@ -109,11 +117,9 @@ public class Craps extends DiceGame implements Game {
         else return GameState.Lose;
     }
 
-
     private int playSecondRound(int roll) {
         double rollAgain = console.getDoubleInput("Press 1 to roll.");
         int secondRoll = roll;
-//        System.out.println("Phase2:\nThe total of the two dice is " + secondRoll);
 
         while (secondRoll !=7 || secondRoll == roll){
 
@@ -125,11 +131,8 @@ public class Craps extends DiceGame implements Game {
             }
             else{
                 System.out.println("What are you waiting for! Keep throwing the dices!!!");
-
             }
-
         }
-
         return secondRoll;
     }
 
@@ -180,11 +183,6 @@ public class Craps extends DiceGame implements Game {
             }
         }
     }
-
-    public void getResults() {
-
-    }
-
 }
 
 
