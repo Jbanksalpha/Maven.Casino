@@ -1,3 +1,11 @@
+
+Contributors: 
+Mike Ninh (@MNinh), 
+Justin Banks (@Jbanksalpha), 
+Monali Khandelwal (@Monali), 
+Alena Litouka (@CodeHere21)
+
+
 # ZCW-Casino
 * Objective:
   * To create a casino simulation.
